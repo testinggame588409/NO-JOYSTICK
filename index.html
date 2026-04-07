@@ -1873,42 +1873,54 @@ function resetToStart() {
 		  	return { 'width' : wx, 'height' : wy };
 		  }
 	  
-var activate_flag = false;
-      var touchStartX = 0; // 🌟 紀錄手指掂落去嘅初始 X 座標
+// 🌟 全新、防死機的隱形滑動搖桿系統 (直接接管觸控，徹底解決無反應問題)
+      var isTouching = false;
+      var touchStartX = 0;
 
       function touch_update() {
-        // 如果冇手指掂住螢幕，重置狀態並放開所有按鍵
-        if (!ongoingTouches.length) {
-            activate_flag = false;
-            keyLeft = false;
-            keyRight = false;
-            return;
-        }
-
-        // 第一次掂落去嗰一下，紀錄 X 座標作為「隱形搖桿」嘅中心點
-        if (!activate_flag) {
-            activate_flag = true;
-            touchStartX = ongoingTouches[0].pageX;
-        }
-
-        keyLeft = false; 
-        keyRight = false;
-
-        // 計算手指左右滑動嘅距離
-        var deltaX = ongoingTouches[0].pageX - touchStartX;
-
-        // 滑動超過 15px 先開始轉彎 (防手震，數字越細越靈敏)
-        if (deltaX < -15) {
-            keyLeft = true;
-        } else if (deltaX > 15) {
-            keyRight = true;
-        }
-
-        // 只要手指掂住畫面，就自動畀油加速
-        keyFaster = true; 
+          // 已經由下面嘅 EventListener 完美接管，呢度留空即可
       }
-	  
-	  var touch = new TouchControl(document.getElementsByTagName("canvas")[0]);
+
+      var myCanvas = document.getElementById('canvas');
+      if (myCanvas) {
+          // 🌟 關鍵修正：加入 { passive: false } 強制防止手機瀏覽器報錯並封鎖觸控
+          myCanvas.addEventListener('touchstart', function(e) {
+              e.preventDefault(); 
+              if (e.changedTouches.length > 0) {
+                  isTouching = true;
+                  touchStartX = e.changedTouches[0].pageX;
+              }
+          }, { passive: false });
+
+          myCanvas.addEventListener('touchmove', function(e) {
+              e.preventDefault();
+              if (!isTouching) return;
+              if (e.changedTouches.length > 0) {
+                  var currentX = e.changedTouches[0].pageX;
+                  var deltaX = currentX - touchStartX;
+
+                  keyLeft = false;
+                  keyRight = false;
+
+                  // 🌟 滑動超過 15px 開始轉向 (你可以改細呢個數字令佢更敏感)
+                  if (deltaX < -15) {
+                      keyLeft = true;
+                  } else if (deltaX > 15) {
+                      keyRight = true;
+                  }
+              }
+          }, { passive: false });
+
+          var endTouch = function(e) {
+              if (e) e.preventDefault();
+              isTouching = false;
+              keyLeft = false;
+              keyRight = false;
+          };
+
+          myCanvas.addEventListener('touchend', endTouch, { passive: false });
+          myCanvas.addEventListener('touchcancel', endTouch, { passive: false });
+      }
 	  	  
     var fps            = 60;                      
     var step           = 1/fps;                   
