@@ -1873,39 +1873,40 @@ function resetToStart() {
 		  	return { 'width' : wx, 'height' : wy };
 		  }
 	  
-	  var activate_flag = false;
+var activate_flag = false;
+      var touchStartX = 0; // 🌟 紀錄手指掂落去嘅初始 X 座標
 
-	  function touch_update() {
-		// 🌟 若偵測到自帶嘅 joystickActive，直接忽略以防止與上方強制橫向 Joystick 衝突
-	  	if (! ongoingTouches.length && ! activate_flag ) {
+      function touch_update() {
+        // 如果冇手指掂住螢幕，重置狀態並放開所有按鍵
+        if (!ongoingTouches.length) {
+            activate_flag = false;
+            keyLeft = false;
+            keyRight = false;
             return;
         }
-	  	if (! activate_flag ) {
+
+        // 第一次掂落去嗰一下，紀錄 X 座標作為「隱形搖桿」嘅中心點
+        if (!activate_flag) {
             activate_flag = true;
+            touchStartX = ongoingTouches[0].pageX;
         }
-	  	keyLeft = false; 
+
+        keyLeft = false; 
         keyRight = false;
 
-	  	for ( var i = 0; i < ongoingTouches.length; i++ ) {
-	  		if ( ongoingTouches[i].pageX < width/2 ) {
-                keyLeft = true;
-            } else if ( ongoingTouches[i].pageX > width/2 ) {
-                keyRight = true;
-            }
-	  	}
+        // 計算手指左右滑動嘅距離
+        var deltaX = ongoingTouches[0].pageX - touchStartX;
 
-		if ( keyLeft && keyRight ) { 
-            keySlower = true; 
-            keyLeft = false; 
-            keyRight = false; 
-        } else { 
-            keyFaster  = true; 
+        // 滑動超過 15px 先開始轉彎 (防手震，數字越細越靈敏)
+        if (deltaX < -15) {
+            keyLeft = true;
+        } else if (deltaX > 15) {
+            keyRight = true;
         }
 
-		if ( speed == 0 ) {
-            activate_flag = false;
-        }
-	  }
+        // 只要手指掂住畫面，就自動畀油加速
+        keyFaster = true; 
+      }
 	  
 	  var touch = new TouchControl(document.getElementsByTagName("canvas")[0]);
 	  	  
