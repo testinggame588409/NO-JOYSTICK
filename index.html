@@ -555,36 +555,24 @@
 <!-- ========== START SCREEN (封面) ========== -->
 <div id="startScreen" class="start-screen" style="position:absolute; justify-content:center; align-items:center; flex-direction:column;">
   <!-- SINOPEC Logo 文字 -->
-  <div style="font-size:1.1em; font-weight:bold; color:rgba(255,255,255,0.7); letter-spacing:4px; margin-bottom:8px;">SINOPEC</div>
+  <div style="font-size:3.1em; font-weight:bold; color:rgba(255,255,255,0.7); letter-spacing:4px; margin-bottom:8px;">SINOPEC</div>
   <!-- 遊戲標題 -->
-  <div style="
-    font-size:2.8em;
-    font-weight:900;
-    color:#ffd700;
-    text-shadow: 0 0 30px #ffd700, 0 0 60px rgba(255,215,0,0.5), 2px 2px 6px rgba(0,0,0,0.8);
-    text-align:center;
-    line-height:1.2;
-    margin-bottom:6px;
-    letter-spacing:2px;
-  ">奪金挑戰賽</div>
-  <!-- 英文副標題 -->
-  <div style="font-size:0.9em; color:rgba(255,255,255,0.6); letter-spacing:3px; margin-bottom:40px;">GOLD RUSH CHALLENGE</div>
+ <img src="title.png" alt="奪金挑戰賽" style="
+      width: 85%; 
+      max-width: 320px; 
+      margin-bottom: 6px; 
+      filter: drop-shadow(0 0 10px rgba(255,215,0,0.5));
+  ">
   <!-- 裝飾分隔線 -->
   <div style="width:200px; height:2px; background:linear-gradient(90deg, transparent, #ffd700, transparent); margin-bottom:40px;"></div>
   <!-- 進入按鈕 -->
-  <button id="enterBtn" style="
-    padding: 16px 50px;
-    font-size: 1.3em;
-    font-weight: 900;
-    background: linear-gradient(135deg, #ffd700, #ffba00);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    color: #4a0000;
-    box-shadow: 0 0 30px rgba(255,215,0,0.6), 0 5px 15px rgba(0,0,0,0.4);
-    letter-spacing: 3px;
-    transition: transform 0.15s, box-shadow 0.15s;
-  ">ENTER</button>
+<img id="enterBtn" src="Button.png" alt="ENTER" style="
+      width: 70%; 
+      max-width: 250px; 
+      cursor: pointer; 
+      transition: transform 0.15s, filter 0.15s;
+      filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+  ">
   <!-- 載入進度 (Loading時顯示) -->
   <div id="coverLoadingArea" style="margin-top:40px; text-align:center; display:none;">
     <div class="loading-container" style="width:250px;">
@@ -631,18 +619,93 @@
 
 <!-- ========== CONSENT PAGE ========== -->
 <div id="consentPage" class="popup-overlay" style="position:absolute;">
-  <div class="popup-content">
+  <div class="popup-content" style="max-width: 90%; width: 500px;">
     <h2>個人資料收集</h2>
-    <div class="consent">
+    
+    <div class="consent" style="align-items: center;">
       <input type="checkbox" id="termsCheckbox">
-      <label for="termsCheckbox">本人已閱讀並同意此活動之<a href="#" style="color: #ffd700;">條款及細則</a>以及中石化的<a href="#" style="color: #ffd700;">私隱政策</a>。</label>
+      <label for="termsCheckbox">本人已閱讀並同意此活動之條款及細則，以及中石化的 <span id="policyToggleBtn" style="color: #ffd700; cursor: pointer; text-decoration: underline; font-weight: bold;">私隱政策 ▼</span></label>
     </div>
-    <div class="consent" style="margin-top: 15px; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-      <p style="margin: 0;">(本人同意主辦單位收集及使用閣下之姓名及電話，僅作為本活動之聯繫、得獎核實及日後中石化/SINOPEC/SINO X Power品牌市場推廣（包括優惠資訊、活動通知）之用途。我們將妥善保存閣下資料並嚴格保密。)</p>
+
+    <div id="policyTextBox" style="
+        display: none; 
+        background: rgba(0,0,0,0.5); 
+        border: 1px solid #ffd700; 
+        border-radius: 8px; 
+        padding: 15px; 
+        margin-bottom: 15px; 
+        max-height: 35vh; 
+        overflow-y: auto; 
+        text-align: left; 
+        font-size: 0.85em; 
+        line-height: 1.6; 
+        color: #ddd;">
+        
+        <h3 style="color:#ffd700; margin-top:0; font-size:1.1em;">關於《個人資料﹙私隱﹚條例》（「條例」）的政策指引</h3>
+        <p>請客戶小心閱讀本政策指引。若客戶對本政策指引有不明瞭處或有任何疑問，敬請聯絡本公司。</p>
+        <p>本政策指引適用於中石化﹙香港﹚油站有限公司及其所在香港的直接附屬公司及聯屬機構 (「本公司」)</p>
+        <p>1. 客戶在建立或延續本公司提供之賒貸設施或本公司提供的產品服務時，需要不時向本公司提供有關其個人資料。</p>
+        <p>2. 若客戶未能向本公司提供有關資料，可能會導致本公司無法建立或延續客戶賒貸設施或向客戶提供任何本公司提供的產品或服務。</p>
+        <p>3. 客戶向本公司提供的個人資料(包括但不限於姓名、身份證號碼、電話號碼、郵寄地址、車輛登記號碼等)，將作以下用途：</p>
+        <div style="margin-left: 15px;">
+            <p>(a) 回應客戶所提交的查詢或需求；</p>
+            <p>(b) 核實客戶的身份及直接付款銀行賬戶持有人之身份；</p>
+            <p>(c) 處理及/或審批客戶之相關申請、續期及/或取消，處理產品及服務訂單；</p>
+            <p>(d) 管理及進行信貸審查及核對程序；</p>
+            <p>(e) 確保客戶持續具備良好信用地位；</p>
+            <p>(f) 確定客戶與本公司之間的欠款額；</p>
+            <p>(g) 向客戶或為客戶的擔保人追收欠款；</p>
+            <p>(h) 遵守對本公司、其關聯公司及/或指定的業務合作夥伴有約束力之法律所要求之披露資料的責任；</p>
+            <p>(i) 設計及/或推廣本公司提供的產品或服務進行市場推廣及/或直接促銷(包括但不限於本公司以書面、電郵、網上、電話等形式進行)；</p>
+            <p>(j) 進行考察及/或市場調查；</p>
+            <p>(k) 進行資料審計及核實； </p>
+            <p>(l) 進行與以上有關之用途。</p>
+        </div>
+        <p>4. 每當本公司要求客戶提供其個人資料，本公司均會說明收集此等資料的用途，並確保只會將資料用於收集時所說明的用途。</p>
+        <p>5. 本公司對持有的個人資料保密，但可以向下述各方提供該等資料或轉移有關資料到香港以外地方予：</p>
+        <div style="margin-left: 15px;">
+            <p>(a) 關於追收欠款事宜、銀行、債務追收代理及其他財務機構；</p>
+            <p>(b) 就行政、電訊、收賬、信用證明、廣告、市場調查、市場推廣、直接促銷及/或優惠促銷、電腦、技術支援、賬務、轉賬或與業務營運方面向本公司提供服務的任何關連公司、代理人、承包商或第三方服務提供者；</p>
+            <p>(c) 業務夥伴、市場推廣策略伙伴或指定之第三方；</p>
+            <p>(d) 為達至上述而被本公司聘用的第三者服務供應單位；</p>
+            <p>(e) 任何對本公司負有保密責任並已承諾對上述資料保密的其他指定人士或機構；</p>
+            <p>(f) 法律或任何監管機構規定或容許本公司、其關聯公司及/或業務合作夥伴披露資料的有關人士。</p>
+        </div>
+        <p>6. 本公司擬把客戶向本公司提供的個人資料用於直接促銷用途，而須為該用途獲得客戶的同意（包括表示不反對）。</p>
+        <p>7. 本公司僅會使用客戶資料作上述用途；本公司將盡其能力保護客戶的個人資料，防止未獲准許的意外查閱、處理或刪除。</p>
+        <p>8. 客戶有權要求查詢或更正其個人資料，或向本公司查詢本公司持有之個人資料的類別、政策和執行慣例。<br>任何該等要求均應以書面形式提出並請郵寄到以下地址：<br>資料保護主任<br>中石化(香港)油站有限公司<br>香港灣仔告士打道郵箱28377號</p>
+        <p>9. 本公司對客戶個人資料的保存時間，不會超過本公司業務所需或法律所要求的時間。</p>
+        <p>10. 本公司保留權利就查閱個人資料所進行的所需程序收取合理費用。</p>
+        <p>11. 本政策指引並不限制客戶根據條例提出所享有的權利。</p>
+        <p>12. 任何客戶可隨時選擇不接收本公司發出的任何直銷推廣資料或優惠促銷聯繫電話，請將填妥的表格交回本公司。</p>
+        <p>13. 如本政策之中文文本與英文文本有歧異，以中文文本為準。</p>
+    </div>
+
+    <div class="consent" style="margin-top: 5px; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; text-align: left;">
+      <p style="margin: 0; font-size: 0.9em; color: #ccc;">(本人同意主辦單位收集及使用閣下之姓名及電話，僅作為本活動之聯繫、得獎核實及日後中石化/SINOPEC/SINO X Power品牌市場推廣之用途。我們將妥善保存閣下資料並嚴格保密。)</p>
     </div>
     <button id="consentSubmitBtn" disabled>同意並繼續</button>
   </div>
 </div>
+
+<script>
+  // 加入點擊展開文字框的邏輯
+  setTimeout(function() {
+    var toggleBtn = document.getElementById("policyToggleBtn");
+    var textBox = document.getElementById("policyTextBox");
+    if(toggleBtn && textBox) {
+      toggleBtn.onclick = function() {
+        if (textBox.style.display === "none" || textBox.style.display === "") {
+          textBox.style.display = "block";
+          toggleBtn.innerHTML = "私隱政策 ▲";
+        } else {
+          textBox.style.display = "none";
+          toggleBtn.innerHTML = "私隱政策 ▼";
+        }
+      };
+    }
+  }, 500);
+</script>
 
 <!-- ========== REGISTRATION POPUP ========== -->
 <div id="regPopup" class="popup-overlay" style="position:absolute;">
@@ -668,20 +731,19 @@
     font-family: inherit;
 ">
     <!-- 進度條區域：賽車在進度條上跑 -->
-    <div style="width: 320px; position: relative; padding-top: 100px;">
-        <!-- 賽車圖片，絕對定位在進度條上方 -->
-        <img id="loadingCarImg" src="images/loading_car.png" style="
-            position: absolute;
-            bottom: 14px;
-            left: 0%;
-            height: 90px;
-            width: auto;
-            transition: left 0.3s ease;
-            transform: translateX(-30%);
-        ">
-        <!-- 進度條軌道 -->
+<div style="width: 320px; position: relative; padding-top: 100px;">
         <div style="width: 100%; height: 18px; background: rgba(0,0,0,0.4); border-radius: 9px; overflow: visible; border: 2px solid rgba(255,215,0,0.5); position: relative;">
-            <div id="gameLoadingBar" style="height:100%; width:0%; background: linear-gradient(90deg, #ffd700, #ffed4a); border-radius:9px; transition: width 0.3s ease; box-shadow: 0 0 10px #ffd700;"></div>
+            <div id="gameLoadingBar" style="height:100%; width:0%; background: linear-gradient(90deg, #ffd700, #ffed4a); border-radius:9px; transition: width 0.3s ease; box-shadow: 0 0 10px #ffd700; position: relative;">
+                <img id="loadingCarImg" src="images/loading_car.png" style="
+                    position: absolute;
+                    bottom: 4px; /* 調校車身與進度條的高低 */
+                    right: 0;
+                    transform: translateX(50%); /* 永遠保持車身正中對齊進度條最前端 */
+                    height: 90px;
+                    width: auto;
+                    z-index: 10;
+                ">
+            </div>
         </div>
     </div>
     <div id="gameLoadingText" style="margin-top:20px; font-size:1em; color:rgba(255,255,255,0.7); letter-spacing:4px;">LOADING...</div>
@@ -846,6 +908,22 @@ function initAudio() {
     if (overlay) overlay.style.display = 'none';
 
     // 🌟 預載語音 MP3
+// 🌟 核心修正：提早在玩家首次點擊時解鎖 iOS BGM 權限
+    if (!bgmAudio) {
+        bgmAudio = new Audio('music/bgm.mp3');
+        bgmAudio.loop = true;
+        
+        // 💡 關鍵動作：一撳掣即刻靜音播一次然後暫停，呃取 iOS 信任！
+        var playPromise = bgmAudio.play();
+        if (playPromise !== undefined) {
+            playPromise.then(function() {
+                bgmAudio.pause();
+                bgmAudio.currentTime = 0;
+            }).catch(function(e) { console.log("BGM 解鎖中:", e); });
+        }
+    }
+
+    // 🌟 預載語音 MP3
     if (!voiceAudio) {
         voiceAudio = new Audio('push to the max.mp3');
         voiceAudio.load();
@@ -862,11 +940,20 @@ document.addEventListener('touchstart', initAudio, { once: true });
 window.addEventListener('keydown', initAudio, { once: true });
 
 function playBGM() {
-    if (bgmAudio) return;
-    bgmAudio = new Audio('music/bgm.mp3');
-    bgmAudio.loop = true;
-    bgmAudio.volume = 0.4;
-    bgmAudio.play().catch(function(e) {});
+    if (bgmAudio) {
+        // 剛才解鎖了權限，現在設定正常音量並正式播放
+        bgmAudio.volume = 0.4; 
+        var playPromise = bgmAudio.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(function(e) { console.log("BGM 播放失敗:", e); });
+        }
+    } else {
+        // 防呆後備方案：如果剛才沒成功建立，再試一次
+        bgmAudio = new Audio('music/bgm.mp3');
+        bgmAudio.loop = true;
+        bgmAudio.volume = 0.4;
+        bgmAudio.play().catch(function(e) {});
+    }
 }
 
 function stopBGM() {
@@ -993,54 +1080,56 @@ var BACKGROUND = {
 
 var SPRITES = {
   // --- 環境及障礙物 (Sheet 0) ---
-  PALM_TREE:              { x: 1830, y:  508, w:  215, h:  540, sheet: 0 },
-  TREE1:                  { x: 1470, y:  265, w:  360, h:  360, sheet: 0 },
-  TREE2:                  { x:    0, y:  661, w:  282, h:  295, sheet: 0 },
-  DEAD_TREE1:             { x:    0, y: 1709, w:  135, h:  332, sheet: 0 },
-  DEAD_TREE2:             { x: 1855, y:  248, w:  150, h:  260, sheet: 0 },
-  BUSH1:                  { x: 1790, y: 1048, w:  240, h:  155, sheet: 0 },
-  BUSH2:                  { x:  495, y: 1709, w:  232, h:  152, sheet: 0 },
-  CACTUS:                 { x: 1790, y: 1203, w:  235, h:  118, sheet: 0 },
-  STUMP:                  { x:  282, y:  661, w:  195, h:  140, sheet: 0 },
-  BOULDER1:               { x: 1855, y:    0, w:  168, h:  248, sheet: 0 },
-  BOULDER2:               { x: 1470, y:  907, w:  298, h:  140, sheet: 0 },
-  BOULDER3:               { x: 1470, y: 1047, w:  320, h:  220, sheet: 0 },
-  COLUMN:                 { x:  135, y: 1709, w:  200, h:  315, sheet: 0 },
-  COIN:                   { x:  335, y: 1853, w:  111, h:  130, sheet: 0 },
+  PALM_TREE:              { x: 0,    y: 1443, w: 215, h: 540, sheet: 0 },
+  TREE1:                  { x: 1470, y: 0,    w: 380, h: 400, sheet: 0 },
+  TREE2:                  { x: 1470, y: 0,    w: 380, h: 400, sheet: 0 }, // ⚠️ 漏咗打包，暫借 TREE1
+  DEAD_TREE1:             { x: 1764, y: 934,  w: 209, h: 628, sheet: 0 },
+  DEAD_TREE2:             { x: 1850, y: 248,  w: 153, h: 261, sheet: 0 },
+  BUSH1:                  { x: 1790, y: 509,  w: 240, h: 155, sheet: 0 },
+  BUSH2:                  { x: 1764, y: 782,  w: 232, h: 152, sheet: 0 },
+  CACTUS:                 { x: 1768, y: 664,  w: 235, h: 118, sheet: 0 },
+  STUMP:                  { x: 1850, y: 0,    w: 168, h: 248, sheet: 0 }, // ⚠️ 漏咗打包，暫借 BOULDER1
+  BOULDER1:               { x: 1850, y: 0,    w: 168, h: 248, sheet: 0 },
+  BOULDER2:               { x: 1470, y: 620,  w: 298, h: 140, sheet: 0 },
+  BOULDER3:               { x: 1470, y: 400,  w: 320, h: 220, sheet: 0 },
+  COLUMN:                 { x: 1470, y: 1050, w: 200, h: 315, sheet: 0 },
+  COIN:                   { x: 1589, y: 1365, w: 111, h: 130, sheet: 0 },
 
   // --- 廣告牌 (Sheet 0) ---
-  BILLBOARD01:            { x: 1470, y: 1267, w:  300, h:  170, sheet: 0 },
-  BILLBOARD02:            { x: 1470, y: 1817, w:  215, h:  220, sheet: 0 },
-  BILLBOARD03:            { x: 1768, y: 1491, w:  230, h:  220, sheet: 0 },
-  BILLBOARD04:            { x: 1770, y: 1321, w:  268, h:  170, sheet: 0 },
-  BILLBOARD05:            { x: 1470, y: 1437, w:  298, h:  190, sheet: 0 },
-  BILLBOARD06:            { x: 1470, y: 1627, w:  298, h:  190, sheet: 0 },
-  BILLBOARD07:            { x: 1685, y: 1817, w:  298, h:  190, sheet: 0 },
-  BILLBOARD08:            { x: 1470, y:    0, w:  385, h:  265, sheet: 0 },
-  BILLBOARD09:            { x: 1470, y:  625, w:  328, h:  282, sheet: 0 },
+  // ⚠️ 由於漏打包大部份廣告牌，依家全部統一用 billboard08 頂替防死機
+  BILLBOARD01:            { x: 1470, y: 760,  w: 294, h: 290, sheet: 0 }, 
+  BILLBOARD02:            { x: 1470, y: 760,  w: 294, h: 290, sheet: 0 }, 
+  BILLBOARD03:            { x: 1470, y: 760,  w: 294, h: 290, sheet: 0 }, 
+  BILLBOARD04:            { x: 1470, y: 760,  w: 294, h: 290, sheet: 0 }, 
+  BILLBOARD05:            { x: 1470, y: 760,  w: 294, h: 290, sheet: 0 }, 
+  BILLBOARD06:            { x: 1470, y: 760,  w: 294, h: 290, sheet: 0 }, 
+  BILLBOARD07:            { x: 1470, y: 760,  w: 294, h: 290, sheet: 0 }, 
+  BILLBOARD08:            { x: 1470, y: 760,  w: 294, h: 290, sheet: 0 }, 
+  BILLBOARD09:            { x: 1470, y: 760,  w: 294, h: 290, sheet: 0 }, 
 
-  // --- 路上車輛 (Sheet 0) ---
-  CAR01:                  { x:  495, y: 1983, w:   80, h:   56, sheet: 0 },
-  CAR02:                  { x:  335, y: 1983, w:   80, h:   59, sheet: 0 },
-  CAR03:                  { x:  575, y: 1983, w:   88, h:   55, sheet: 0 },
-  CAR04:                  { x:  415, y: 1983, w:   80, h:   57, sheet: 0 },
-  TRUCK:                  { x:  446, y: 1861, w:  100, h:   78, sheet: 0 },
-  SEMI:                   { x:  335, y: 1709, w:  122, h:  144, sheet: 0 },
+// --- 路上車輛 (Sheet 0) ---
+  CAR01:                  { x: 303,  y: 722,  w: 80,  h: 58,  sheet: 0 },
+  CAR02:                  { x: 223,  y: 661,  w: 80,  h: 61,  sheet: 0 },
+  CAR03:                  { x: 160,  y: 661,  w: 63,  h: 66,  sheet: 0 },
+  CAR04:                  { x: 223,  y: 722,  w: 80,  h: 60,  sheet: 0 },
+  CAR05:                  { x: 80,   y: 661,  w: 80,  h: 66,  sheet: 0 }, // 🌟 新增嘅 CAR05
+  TRUCK:                  { x: 0,    y: 661,  w: 80,  h: 93,  sheet: 0 },
+  SEMI:                   { x: 1470, y: 1365, w: 119, h: 144, sheet: 0 },
 
   // --- 玩家主角 (橫跨 Sheet 0 同 Sheet 1) ---
-  PLAYER_STRAIGHT:        { x:  735, y:    0, w:  735, h:  661, sheet: 0 },
-  PLAYER_LEFT:            { x:  735, y: 1322, w:  735, h:  661, sheet: 0 },
-  PLAYER_RIGHT:           { x:    0, y:    0, w:  735, h:  661, sheet: 1 }, 
+  PLAYER_STRAIGHT:        { x: 735,  y: 0,    w: 735, h: 661, sheet: 0 }, // player_front.png
+  PLAYER_LEFT:            { x: 735,  y: 1322, w: 735, h: 661, sheet: 0 }, // player_left.png
+  PLAYER_RIGHT:           { x: 0,    y: 0,    w: 735, h: 661, sheet: 1 }, // player_right.png (Sheet 1)
   
   // --- 玩家主角噴火狀態 ---
-  PLAYER_STRAIGHT_FIRE:   { x:    0, y:    0, w:  735, h:  661, sheet: 0 },
-  PLAYER_LEFT_FIRE:       { x:    0, y: 1048, w:  735, h:  661, sheet: 0 },
-  PLAYER_RIGHT_FIRE:      { x:  735, y:  661, w:  735, h:  661, sheet: 0 },
+  PLAYER_STRAIGHT_FIRE:   { x: 0,    y: 0,    w: 735, h: 661, sheet: 0 }, // player_front(fire).png
+  PLAYER_LEFT_FIRE:       { x: 0,    y: 782,  w: 735, h: 661, sheet: 0 }, // player_left(fire).png
+  PLAYER_RIGHT_FIRE:      { x: 735,  y: 661,  w: 735, h: 661, sheet: 0 }, // player_left(right).png
 
   // --- 玩家主角上斜狀態 (借用) ---
-  PLAYER_UPHILL_STRAIGHT: { x:  735, y:    0, w:  735, h:  661, sheet: 0 },
-  PLAYER_UPHILL_LEFT:     { x:  735, y: 1322, w:  735, h:  661, sheet: 0 },
-  PLAYER_UPHILL_RIGHT:    { x:    0, y:    0, w:  735, h:  661, sheet: 1 }
+  PLAYER_UPHILL_STRAIGHT: { x: 735,  y: 0,    w: 735, h: 661, sheet: 0 },
+  PLAYER_UPHILL_LEFT:     { x: 735,  y: 1322, w: 735, h: 661, sheet: 0 },
+  PLAYER_UPHILL_RIGHT:    { x: 0,    y: 0,    w: 735, h: 661, sheet: 1 }
 };
 
 var REAL_CAR_WIDTH = 80;
@@ -1048,7 +1137,7 @@ var REAL_CAR_WIDTH = 80;
 SPRITES.SCALE = 0.38 * (1 / REAL_CAR_WIDTH);
 SPRITES.BILLBOARDS = [SPRITES.BILLBOARD01, SPRITES.BILLBOARD02, SPRITES.BILLBOARD03, SPRITES.BILLBOARD04, SPRITES.BILLBOARD05, SPRITES.BILLBOARD06, SPRITES.BILLBOARD07, SPRITES.BILLBOARD08, SPRITES.BILLBOARD09];
 SPRITES.PLANTS     = [SPRITES.TREE1, SPRITES.TREE2, SPRITES.DEAD_TREE1, SPRITES.DEAD_TREE2, SPRITES.PALM_TREE, SPRITES.BUSH2, SPRITES.CACTUS, SPRITES.STUMP, SPRITES.BOULDER1, SPRITES.BOULDER2];
-SPRITES.CARS       = [SPRITES.CAR01, SPRITES.CAR02, SPRITES.CAR03, SPRITES.CAR04, SPRITES.SEMI, SPRITES.TRUCK];
+SPRITES.CARS       = [SPRITES.CAR01, SPRITES.CAR02, SPRITES.CAR03, SPRITES.CAR04, SPRITES.CAR05, SPRITES.SEMI, SPRITES.TRUCK]; // 🌟 加入咗 SPRITES.CAR05
 
 
 // =========================================================================
@@ -1197,12 +1286,19 @@ function initStartScreen() {
   var enterBtn = document.getElementById('enterBtn');
   if (enterBtn) {
     enterBtn.onclick = function() {
-      playClickSound(); // ✅ 修正為正確的函數名稱
+      playClickSound(); 
       screen.style.display = 'none';
       showIntroPage();
     };
-    enterBtn.onmouseover = function() { this.style.transform = 'scale(1.08)'; this.style.boxShadow = '0 0 40px rgba(255,215,0,0.9), 0 5px 20px rgba(0,0,0,0.5)'; };
-    enterBtn.onmouseout  = function() { this.style.transform = 'scale(1)'; this.style.boxShadow = '0 0 30px rgba(255,215,0,0.6), 0 5px 15px rgba(0,0,0,0.4)'; };
+    // 🌟 改為 filter: drop-shadow 配合透明圖片，滑鼠指住時會邊緣發光
+    enterBtn.onmouseover = function() { 
+        this.style.transform = 'scale(1.08)'; 
+        this.style.filter = 'drop-shadow(0 0 15px rgba(255,215,0,0.9))'; 
+    };
+    enterBtn.onmouseout  = function() { 
+        this.style.transform = 'scale(1)'; 
+        this.style.filter = 'drop-shadow(0 5px 10px rgba(0,0,0,0.5))'; 
+    };
   }
 }
 
@@ -1280,11 +1376,11 @@ function showRegPopup() {
 }
 
 // ========== GAME LOADING ANIMATION (賽車在進度條上跑) ==========
+// ========== GAME LOADING ANIMATION (賽車在進度條上跑) ==========
 function showGameLoading() {
   var screen = document.getElementById('loadingScreen');
   var bar = document.getElementById('gameLoadingBar');
   var text = document.getElementById('gameLoadingText');
-  var car = document.getElementById('loadingCarImg');
   screen.style.display = 'flex';
   
   playEngineLoadingSound(); // 開始播放引擎聲
@@ -1292,10 +1388,6 @@ function showGameLoading() {
   var progress = 0;
   var stuckDone = false;
   var isStuck = false;
-
-  function updateCarPos(pct) {
-    if (car) car.style.left = pct + '%';
-  }
   
   var loadInterval = setInterval(function() {
     if (isStuck) {
@@ -1308,7 +1400,7 @@ function showGameLoading() {
 
     progress += Math.random() * 3.5 + 2.5;
 
-    // 🌟 巧思：引擎轉速隨著進度條往前衝而越來越高！(從 40Hz 拉到約 180Hz)
+    // 🌟 巧思：引擎轉速隨著進度條往前衝而越來越高！
     if (loadingEngineOsc && audioCtx) {
         var targetFreq = 40 + (progress * 1.4);
         loadingEngineOsc.frequency.linearRampToValueAtTime(targetFreq, audioCtx.currentTime + 0.28);
@@ -1317,7 +1409,6 @@ function showGameLoading() {
     if (!stuckDone && progress >= 48) {
       progress = 48;
       bar.style.width = progress + '%';
-      updateCarPos(progress);
       text.textContent = 'LOADING...';
       isStuck = true;
       setTimeout(function() {
@@ -1331,7 +1422,6 @@ function showGameLoading() {
     if (progress >= 100) {
       progress = 100;
       bar.style.width = '100%';
-      updateCarPos(100);
       text.textContent = 'GO!';
       clearInterval(loadInterval);
       
@@ -1343,8 +1433,8 @@ function showGameLoading() {
       }, 500);
       return;
     }
+    // 🌟 依家只需控制進度條闊度，架車就會完美自動跟隨！
     bar.style.width = progress + '%';
-    updateCarPos(progress);
   }, 280);
 }
 
