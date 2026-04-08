@@ -910,21 +910,19 @@ function initAudio() {
     // 🌟 預載語音 MP3
 // 🌟 核心修正：提早在玩家首次點擊時解鎖 iOS BGM 權限
 // 🌟 核心修正：加入強制靜音，確保 Chrome 唔會偷步出聲
+// 🌟 核心修正：加入強制靜音，確保 Chrome 唔會偷步出聲
     if (!bgmAudio) {
         bgmAudio = new Audio('music/bgm.mp3');
         bgmAudio.loop = true;
         
-        bgmAudio.muted = true; // 🔕 第一道防線：強制靜音
-        bgmAudio.volume = 0;   // 🔕 第二道防線：音量歸零
+        // 🔕 關鍵絕招：強制靜音 + 音量歸零
+        bgmAudio.muted = true; 
+        bgmAudio.volume = 0;   
         
-        // 一撳掣即刻靜音播一次然後暫停，呃取 iOS 信任！
+        // 💡 一撳掣即刻開始播放，而且**唔好暫停**！由佢喺背景靜音播住先
         var playPromise = bgmAudio.play();
         if (playPromise !== undefined) {
-            playPromise.then(function() {
-                bgmAudio.pause();
-                bgmAudio.currentTime = 0;
-                bgmAudio.muted = false; // 🔓 解鎖成功，解除靜音等候發落
-            }).catch(function(e) { console.log("BGM 解鎖中:", e); });
+            playPromise.catch(function(e) { console.log("BGM 靜音播放受阻:", e); });
         }
     }
 
@@ -946,13 +944,14 @@ window.addEventListener('keydown', initAudio, { once: true });
 
 function playBGM() {
     if (bgmAudio) {
-        // 🌟 倒數完結，正式播放！
-        bgmAudio.muted = false; // 確保已經解除靜音
-        bgmAudio.volume = 0.4;  // 恢復正常音量
+        // 🌟 倒數完結！將已經喺背景播緊嘅音樂拉返去開頭，然後開聲
+        bgmAudio.currentTime = 0; 
+        bgmAudio.muted = false;   // 解除靜音
+        bgmAudio.volume = 0.4;    // 恢復正常音量
         
-        var playPromise = bgmAudio.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(function(e) { console.log("BGM 播放失敗:", e); });
+        // 防呆：如果因為某些極端原因真係停咗，先至再 call play()
+        if (bgmAudio.paused) {
+            bgmAudio.play().catch(function(e) { console.log("BGM 補救播放失敗:", e); });
         }
     } else {
         // 防呆後備方案
